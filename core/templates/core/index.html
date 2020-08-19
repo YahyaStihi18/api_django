@@ -6,11 +6,17 @@
 
 			<div class="hero" data-bg-image="{% static 'core/images/banner.png'%}">
 				<div class="container">
-					<form action="#" class="find-location">
-						<input type="text" placeholder="Find your location...">
+					<div class="border_top pt-3">
+						{% if messages %}{% for message in messages %}
+						<div class="alert alert-{{ message.tags }}">{{ message}}</div>
+						{% endfor %}{% endif %}
+						</div>
+
+					<form action="." class="find-location" method="POST">
+						{% csrf_token %}
+						<input id="search" name="search" type="text" placeholder="Find your location...">
 						<input type="submit" value="Find">
 					</form>
-
 				</div>
 			</div>
 			<div class="forecast-table">
@@ -23,7 +29,7 @@
 							<div class="forecast-content">
 								<div class="location">{{weather.city}}</div>
 								<div class="degree">
-									<div class="num">{{weather.temperature}}<sup>o</sup>C</div>
+									<div class="num">{{weather.temperature}}<sup>o</sup>C</div><br>
 									<div class="forecast-icon">
 										<img src="http://openweathermap.org/img/wn/{{weather.icon}}@2x.png" alt="" width=90>
 									</div>	
@@ -35,76 +41,15 @@
 						</div>
 						<div class="forecast">
 							<div class="forecast-header">
-								<div class="day">Tuesday</div>
+								<div class="day">You Info</div>
 							</div> <!-- .forecast-header -->
 							<div class="forecast-content">
-								<div class="forecast-icon">
-									<img src="{% static 'core/images/icons/icon-3.svg'%}" alt="" width=48>
-								</div>
-								<div class="degree">23<sup>o</sup>C</div>
-								<small>18<sup>o</sup></small>
+								{{ ip_info.ip }}
+								{{ ip_info.country_code}}
+
+
 							</div>
-						</div>
-						<div class="forecast">
-							<div class="forecast-header">
-								<div class="day">Wednesday</div>
-							</div> <!-- .forecast-header -->
-							<div class="forecast-content">
-								<div class="forecast-icon">
-									<img src="{% static 'core/images/icons/icon-5.svg'%}" alt="" width=48>
-								</div>
-								<div class="degree">23<sup>o</sup>C</div>
-								<small>18<sup>o</sup></small>
-							</div>
-						</div>
-						<div class="forecast">
-							<div class="forecast-header">
-								<div class="day">Thursday</div>
-							</div> <!-- .forecast-header -->
-							<div class="forecast-content">
-								<div class="forecast-icon">
-									<img src="{% static 'core/images/icons/icon-7.svg'%}" alt="" width=48>
-								</div>
-								<div class="degree">23<sup>o</sup>C</div>
-								<small>18<sup>o</sup></small>
-							</div>
-						</div>
-						<div class="forecast">
-							<div class="forecast-header">
-								<div class="day">Friday</div>
-							</div> <!-- .forecast-header -->
-							<div class="forecast-content">
-								<div class="forecast-icon">
-									<img src="{% static 'core/images/icons/icon-12.svg'%}" alt="" width=48>
-								</div>
-								<div class="degree">23<sup>o</sup>C</div>
-								<small>18<sup>o</sup></small>
-							</div>
-						</div>
-						<div class="forecast">
-							<div class="forecast-header">
-								<div class="day">Saturday</div>
-							</div> <!-- .forecast-header -->
-							<div class="forecast-content">
-								<div class="forecast-icon">
-									<img src="{% static 'core/images/icons/icon-13.svg'%}" alt="" width=48>
-								</div>
-								<div class="degree">23<sup>o</sup>C</div>
-								<small>18<sup>o</sup></small>
-							</div>
-						</div>
-						<div class="forecast">
-							<div class="forecast-header">
-								<div class="day">Sunday</div>
-							</div> <!-- .forecast-header -->
-							<div class="forecast-content">
-								<div class="forecast-icon">
-									<img src="{% static 'core/images/icons/icon-14.svg'%}" alt="" width=48>
-								</div>
-								<div class="degree">23<sup>o</sup>C</div>
-								<small>18<sup>o</sup></small>
-							</div>
-						</div>
+						</div>	
 					</div>
 				</div>
 			</div>
