@@ -4,11 +4,13 @@
 {% block menu %}
 <li class="menu-item current-menu-item"><a href="{% url 'index' %}">Weather API</a></li>
 <li class="menu-item"><a href="{% url 'ip' %}">IP Address API</a></li>
+<li class="menu-item"><a href="{% url 'news' %}">News API</a></li>
+
 {% endblock menu %}
 {% block content %}
 <!-- .site-header -->
 
-			<div class="hero" data-bg-image="{% static 'core/images/banner.png'%}">
+			<div class="hero" data-bg-image="{% static 'core/images/weather.jpg'%}">
 				<div class="container">
 					<div class="border_top pt-3">
 						{% if messages %}{% for message in messages %}

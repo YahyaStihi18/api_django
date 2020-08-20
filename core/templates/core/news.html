@@ -1,0 +1,110 @@
+{% extends 'core/base.html' %}
+{% load static %}
+
+{% block menu %}
+<li class="menu-item "><a href="{% url 'index' %}">Weather API</a></li>
+<li class="menu-item "><a href="{% url 'ip' %}">IP Address API</a></li>
+<li class="menu-item current-menu-item"><a href="{% url 'news' %}">News API</a></li>
+
+{% endblock menu %}
+
+{% block content %}
+<div class="fullwidth-block">
+    <div class="container">
+
+        <h1>Breaking News:</h1><hr>
+        <div class="row">
+            <div class="content col-md-8">
+
+                <div class="post">
+                    <h2 class="entry-title">{{article0.title}}</h2>
+                    <div class="featured-image"><img src="{{article0.urlToImage}}" alt=""></div>
+                    <p>{{article0.description}}</p>
+                    <p>{% if article0.author == None %} By: unknown {% else %} {{article0.author}}{% endif %}
+                        ({{article0.publishedAt }}) </p>
+                    <a href="{{article0.url}}" class="button">Read more</a>
+                </div>
+
+                <div class="post">
+                    <h2 class="entry-title">{{article1.title}}</h2>
+                    <div class="featured-image"><img src="{{article1.urlToImage}}" alt=""></div>
+                    <p>{{article1.description}}</p>
+                    <p>By: {% if article1.author == None %}unknown {% else %}{{article1.author}}{% endif %}
+                        ({{article1.publishedAt }}) </p>
+                    <a href="{{article1.url}}" class="button">Read more</a>
+                </div>
+
+                <div class="post">
+                    <h2 class="entry-title">{{article2.title}}</h2>
+                    <div class="featured-image"><img src="{{article2.urlToImage}}" alt=""></div>
+                    <p>{{article2.description}}</p>
+                    <p>By: {% if article2.author == None %}unknown {% else %}{{article2.author}}{% endif %}
+                        ({{article2.publishedAt }}) </p>
+                    <a href="{{article2.url}}" class="button">Read more</a>
+                </div>
+                <div class="post">
+                    <h2 class="entry-title">{{article3.title}}</h2>
+                    <div class="featured-image"><img src="{{article3.urlToImage}}" alt=""></div>
+                    <p>{{article3.description}}</p>
+                    <p>By: {% if article3.author == None %}unknown {% else %}{{article3.author}}{% endif %}
+                        ({{article3.publishedAt }}) </p>
+                    <a href="{{article3.url}}" class="button">Read more</a>
+                </div>
+            </div>
+            <div class="sidebar col-md-3 col-md-offset-1">
+                <div class="widget">
+                    <h3 class="widget-title">Hot News</h3>
+                    <ul class="arrow-list">
+                        <li><a href="{{article4.url}}">{{article4.title}}</a></li>
+                        <li><a href="{{article5.url}}">{{article5.title}}</a></li>
+                        <li><a href="{{article6.url}}">{{article6.title}}</a></li>
+                        <li><a href="{{article7.url}}">{{article7.title}}</a></li>
+                    </ul>
+                </div>
+
+                <div class="widget">
+                    <h3 class="widget-title">Top Reading</h3>
+
+                        <img src="{{article8.urlToImage}}" width="100%" alt=""><br>
+                        <a href="{{article8.url}}">{{article8.title}}</a><hr>
+
+                        <img src="{{article9.urlToImage}}" width="100%" alt=""><br>
+                        <a href="{{article9.url}}">{{article9.title}}</a><hr>
+
+                        <img src="{{article10.urlToImage}}" width="100%" alt=""><br>
+                        <a href="{{article10.url}}">{{article10.title}}</a><hr>
+
+                        <img src="{{article11.urlToImage}}" width="100%" alt=""><br>
+                        <a href="{{article11.url}}">{{article11.title}}</a><hr>
+
+                        <img src="{{article12.urlToImage}}" width="100%" alt=""><br>
+                        <a href="{{article12.url}}">{{article12.title}}</a><hr>
+
+                        <img src="{{article13.urlToImage}}" width="100%" alt=""><br>
+                        <a href="{{article13.url}}">{{article13.title}}</a><hr>
+
+                        <img src="{{article14.urlToImage}}" width="100%" alt=""><br>
+                        <a href="{{article14.url}}">{{article14.title}}</a><hr>
+
+                        <img src="{{article15.urlToImage}}" width="100%" alt=""><br>
+                        <a href="{{article15.url}}">{{article15.title}}</a><hr>
+
+                </div>
+
+                <div class="widget top-rated">
+                    <h3 class="widget-title">Top rated posts</h3>
+                    <ul class="arrow-list">
+                        <li><a href="{{article16.url}}">{{article16.title}}</a></li><hr>
+                        <li><a href="{{article17.url}}">{{article17.title}}</a></li><hr>
+                        <li><a href="{{article18.url}}">{{article18.title}}</a></li><hr>
+                        <li><a href="{{article19.url}}">{{article19.title}}</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</main> <!-- .main-content -->
+
+
+{% endblock content %}
