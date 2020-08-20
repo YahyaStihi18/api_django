@@ -10,7 +10,7 @@
 
 		<!-- Loading third party fonts -->
 		<link href="http://fonts.googleapis.com/css?family=Roboto:300,400,700|" rel="stylesheet" type="text/css">
-		<link href="fonts/font-awesome.min.css" rel="stylesheet" type="text/css">
+		<link href="{% static 'core/fonts/font-awesome.min.css'%}" rel="stylesheet" type="text/css">
 
 		<!-- Loading main css file -->
 		<link rel="stylesheet" href="{% static 'core/style.css'%}">
@@ -40,11 +40,9 @@
 					<div class="main-navigation">
 						<button type="button" class="menu-toggle"><i class="fa fa-bars"></i><img src="https://img.icons8.com/fluent/28/000000/menu--v1.png"/></button>
 						<ul class="menu">
-							<li class="menu-item current-menu-item"><a href="index.html">Home</a></li>
-							<li class="menu-item"><a href="news.html">News</a></li>
-							<li class="menu-item"><a href="live-cameras.html">Live cameras</a></li>
-							<li class="menu-item"><a href="photos.html">Photos</a></li>
-							<li class="menu-item"><a href="contact.html">Contact</a></li>
+							{% block menu %}
+
+							{% endblock menu %}
 						</ul> <!-- .menu -->
 					</div> <!-- .main-navigation -->
 
@@ -68,10 +66,10 @@
             </div>
             <div class="col-md-3 col-md-offset-1">
                 <div class="social-links">
-                    <a href="#"><i class="fa fa-facebook"></i>f</a>
-                    <a href="#"><i class="fa fa-twitter"></i>t</a>
-                    <a href="#"><i class="fa fa-google-plus">g</i></a>
-                    <a href="#"><i class="fa fa-pinterest"></i>p</a>
+                    <a href="#"><i class="fa fa-facebook"></i></a>
+                    <a href="#"><i class="fa fa-twitter"></i></a>
+                    <a href="#"><i class="fa fa-google-plus"></i></a>
+                    <a href="#"><i class="fa fa-pinterest"></i></a>
                 </div>
             </div>
         </div>

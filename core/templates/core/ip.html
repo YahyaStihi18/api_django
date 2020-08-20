@@ -1,0 +1,55 @@
+{% extends 'core/base.html' %}
+{% load static %}
+
+{% block menu %}
+<li class="menu-item "><a href="{% url 'index' %}">Weather API</a></li>
+<li class="menu-item current-menu-item"><a href="{% url 'ip' %}">IP Address API</a></li>
+{% endblock menu %}
+
+{% block content %}
+<div class="hero" data-bg-image="{% static 'core/images/banner.png'%}">
+    <div class="container">
+        <div class="border_top pt-3">
+            {% if messages %}{% for message in messages %}
+            <div class="alert alert-{{ message.tags }}">{{ message}}</div>
+            {% endfor %}{% endif %}
+        </div>
+
+        <form action="." class="find-location" method="POST">
+            {% csrf_token %}
+            <input id="search" name="search" type="text" placeholder="Find your IP Info...">
+            <input type="submit" value="Find">
+        </form>
+    </div>
+</div>
+<div class="forecast-table">
+    <div class="container">
+        <div class="forecast-container">
+            <div class="today forecast">
+                <div class="forecast-header">
+                </div> <!-- .forecast-header -->
+                <div class="forecast-content" style="font-weight: 500;">
+
+                    <h4>Your ip address is: {{ ip }}</h4><span><img width="25rem" src="{{country_flag}}"></span>
+                    <hr>
+                    <h4>Location info :</h4>
+                    Continent: {{ continent_name }}<br>
+                    country: {{ country_name}}  <br>
+                    Capital: {{ capital }}<br>
+                    language : {{languages}}<br>
+                    Region name: {{region_name}}<br>
+                    City: {{ city }} ({{ region_code }})<br>
+                    Zip code: {{ zip }}
+                    <hr>
+                    Latitude: {{latitude}}<br>
+                    Longitude: {{ longitude }}<br>
+
+                    
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+{% endblock content %}

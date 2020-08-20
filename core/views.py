@@ -2,29 +2,18 @@ from django.shortcuts import render
 import requests
 import datetime
 from django.contrib import messages
-from ipware import get_client_ip
+import publicip
 
 
 
 def index(request):
     today = datetime.date.today()
-
-    ip = request.META.get("REMOTE_ADDR")
-    urlip = 'http://api.ipstack.com/{}?access_key=36b65ab092455a14f25413ae9dc8e9b0'
-    r = requests.get(urlip.format(ip)).json()
-    ip_info = {
-        'ip':ip,
-        'country_code':country_code,
-    }
-
-    print(ip)
     url = 'http://api.openweathermap.org/data/2.5/weather?q={}&units=metric&appid=7d3e88675b678961df9ba90435e7a5f6'
     
     if request.method == 'POST':
         searchWord = request.POST.get('search','')
         try:        
             city = searchWord
-
             r = requests.get(url.format(city)).json()
             weather = {
         
@@ -38,7 +27,6 @@ def index(request):
             context = {
         'weather':weather,
         'today':today,
-        'ip_info':ip_info,
             }
             return render(request,'core/index.html',context)
         except :
@@ -57,6 +45,56 @@ def index(request):
     context = {
         'weather':weather,
         'today':today,
-        'ip_info':ip_info,
             }
     return render(request,'core/index.html',context)
+
+
+
+def ip(request):
+
+    ip = requests.get('https://ipapi.co/ip/').text
+    url = "http://api.ipstack.com/{}?access_key=36b65ab092455a14f25413ae9dc8e9b0"
+    if request.method == 'POST':
+        searchWord = request.POST.get('search','')
+        try:        
+            ip = searchWord
+            r = requests.get(url.format(ip)).json()
+            context = {
+        'ip':ip,
+        'continent_name':r['continent_name'],
+        'country_name':r['country_name'],
+        'country_flag':r['location']['country_flag'],
+        'capital':r['location']['capital'],
+        'languages':r['location']['languages'][0]['name'],
+        'region_name':r['region_name'],
+        'region_code':r['region_code'],
+        'city':r['city'],
+        'zip':r['zip'],
+        'latitude':r['latitude'],
+        'longitude':r['longitude'],
+            }
+            return render(request,'core/ip.html',context)
+        except :
+            messages.error(request, 'IP not found !!')
+    ip = requests.get('https://ipapi.co/ip/').text
+    r = requests.get(url.format(ip)).json()
+    context = {
+        'ip':ip,
+        'continent_name':r['continent_name'],
+        'country_name':r['country_name'],
+        'country_flag':r['location']['country_flag'],
+        'capital':r['location']['capital'],
+        'languages':r['location']['languages'][0]['name'],
+        'region_name':r['region_name'],
+        'region_code':r['region_code'],
+        'city':r['city'],
+        'zip':r['zip'],
+        'latitude':r['latitude'],
+        'longitude':r['longitude'],
+
+
+            }
+
+    return render(request,'core/ip.html',context)
+
+
