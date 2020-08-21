@@ -3,6 +3,8 @@ import requests
 import datetime
 from django.contrib import messages
 import publicip
+from googleapiclient.discovery import build
+
 
 
 
@@ -222,3 +224,46 @@ def news(request):
         }
 
     return render(request,'core/news.html',context)
+
+
+def youtube(request):
+    searchWord = 'algeria'
+    if request.method == 'POST':
+        searchWord = request.POST.get('search','')
+    else:
+        pass
+    
+    api_key = 'AIzaSyCb5VnUNMp9XEKB0T5FRErO0xl_Xr7xIS4'
+    youtube = build('youtube','v3',developerKey=api_key)
+    r = youtube.search().list(q=searchWord,maxResults=3,part='snippet',type='video',order='rating')
+    res = r.execute()
+    
+    video0 = {
+        'title':res['items'][0]['snippet']['title'],
+        'id':res['items'][0]['id']['videoId'],
+        'image':res['items'][0]['snippet']['thumbnails']['high']['url'],
+        'description':res['items'][0]['snippet']['description'],
+        'publishedAt':res['items'][0]['snippet']['publishedAt'],
+    }
+    video1 = {
+        'title':res['items'][1]['snippet']['title'],
+        'id':res['items'][1]['id']['videoId'],
+        'image':res['items'][1]['snippet']['thumbnails']['high']['url'],
+        'description':res['items'][1]['snippet']['description'],
+        'publishedAt':res['items'][1]['snippet']['publishedAt'],
+    }
+    video2 = {
+        'title':res['items'][2]['snippet']['title'],
+        'id':res['items'][2]['id']['videoId'],
+        'image':res['items'][2]['snippet']['thumbnails']['high']['url'],
+        'description':res['items'][2]['snippet']['description'],
+        'publishedAt':res['items'][2]['snippet']['publishedAt'],
+    }
+
+
+
+    context = {
+        'video0':video0,'video1':video1,'video2':video2,
+
+    }
+    return render(request, 'core/youtube.html', context)

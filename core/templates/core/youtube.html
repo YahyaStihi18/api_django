@@ -1,0 +1,76 @@
+{% extends 'core/base.html' %}
+{% load static %}
+
+{% block menu %}
+<li class="menu-item "><a href="{% url 'index' %}">Weather API</a></li>
+<li class="menu-item "><a href="{% url 'ip' %}">IP Address API</a></li>
+<li class="menu-item"><a href="{% url 'news' %}">News API</a></li>
+<li class="menu-item current-menu-item"><a href="{% url 'youtube' %}">Youtube API</a></li>
+
+{% endblock menu %}
+
+{% block content %}
+<div class="hero" data-bg-image="{% static 'core/images/ip.jpg'%}">
+    <div class="container">
+        <div class="border_top pt-3">
+            {% if messages %}{% for message in messages %}
+            <div class="alert alert-{{ message.tags }}">{{ message}}</div>
+            {% endfor %}{% endif %}
+        </div>
+
+        <form action="." class="find-location" method="POST">
+            {% csrf_token %}
+            <input id="search" name="search" type="text" placeholder="Find your IP Info...">
+            <input type="submit" value="Find">
+        </form>
+    </div>
+</div>
+
+<div class="fullwidth-block">
+    <div class="container">
+
+        <h1>Top Ratings:</h1><hr>
+        <div class="row">
+            <div class="content col-md-8">
+
+                <div class="post">
+                    <h2 class="entry-title">{{video0.title}}</h2>
+                    <div class="featured-image"><img src="{{video0.image}}" alt=""></div>
+                    <P>{{video0.description}}</P>
+                    <p>{{video0.publishedAt}}</p>
+                    <a href="https://www.youtube.com/watch?v={{video0.id}}" class="button">Watch</a>
+                </div>
+                <div class="post">
+                    <h2 class="entry-title">{{video1.title}}</h2>
+                    <div class="featured-image"><img src="{{video1.image}}" alt=""></div>
+                    <P>{{video1.description}}</P>
+                    <p>{{video1.publishedAt}}</p>
+                    <a href="https://www.youtube.com/watch?v={{video1.id}}" class="button">Watch</a>
+                </div>
+                <div class="post">
+                    <h2 class="entry-title">{{video2.title}}</h2>
+                    <div class="featured-image"><img src="{{video2.image}}" alt=""></div>
+                    <P>{{video2.description}}</P>
+                    <p>{{video2.publishedAt}}</p>
+                    <a href="https://www.youtube.com/watch?v={{video2.id}}" class="button">Watch</a>
+                </div>
+
+               
+            </div>
+            <div class="sidebar col-md-3 col-md-offset-1">
+
+                <div class="widget">
+                    <h3 class="widget-title">Related:</h3>
+
+                        <img src="{{article8.urlToImage}}" width="100%" alt=""><br>
+                        <a href="{{article8.url}}">{{article8.title}}</a><hr>
+
+                       
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+</main> <!-- .main-content -->
+{% endblock content %}
