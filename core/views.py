@@ -227,7 +227,7 @@ def news(request):
 
 
 def youtube(request):
-    searchWord = 'algeria'
+    searchWord = 'Algerian viral video'
     if request.method == 'POST':
         searchWord = request.POST.get('search','')
     else:
@@ -235,8 +235,9 @@ def youtube(request):
     
     api_key = 'AIzaSyCb5VnUNMp9XEKB0T5FRErO0xl_Xr7xIS4'
     youtube = build('youtube','v3',developerKey=api_key)
-    r = youtube.search().list(q=searchWord,maxResults=3,part='snippet',type='video',order='rating')
+    r = youtube.search().list(q=searchWord,maxResults=9,part='snippet',type='video')
     res = r.execute()
+    
     
     video0 = {
         'title':res['items'][0]['snippet']['title'],
@@ -260,10 +261,43 @@ def youtube(request):
         'publishedAt':res['items'][2]['snippet']['publishedAt'],
     }
 
+    video3 = {
+        'title':res['items'][3]['snippet']['title'],
+        'id':res['items'][3]['id']['videoId'],
+        'image':res['items'][3]['snippet']['thumbnails']['high']['url'],
+    }
+    video4 = {
+        'title':res['items'][4]['snippet']['title'],
+        'id':res['items'][4]['id']['videoId'],
+        'image':res['items'][4]['snippet']['thumbnails']['high']['url'],
+    }
+    video5 = {
+        'title':res['items'][5]['snippet']['title'],
+        'id':res['items'][5]['id']['videoId'],
+        'image':res['items'][5]['snippet']['thumbnails']['high']['url'],
+    }
+    video6 = {
+        'title':res['items'][6]['snippet']['title'],
+        'id':res['items'][6]['id']['videoId'],
+        'image':res['items'][6]['snippet']['thumbnails']['high']['url'],
+    }
+    video7 = {
+        'title':res['items'][7]['snippet']['title'],
+        'id':res['items'][7]['id']['videoId'],
+        'image':res['items'][7]['snippet']['thumbnails']['high']['url'],
+    } 
+    video8 = {
+        'title':res['items'][8]['snippet']['title'],
+        'id':res['items'][8]['id']['videoId'],
+        'image':res['items'][8]['snippet']['thumbnails']['high']['url'],
+    }     
+
 
 
     context = {
         'video0':video0,'video1':video1,'video2':video2,
+        'video3':video3,'video4':video4,'video5':video5,
+        'video6':video6,'video7':video7,'video8':video8,
 
     }
     return render(request, 'core/youtube.html', context)
