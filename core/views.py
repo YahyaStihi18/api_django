@@ -1,6 +1,5 @@
 from django.shortcuts import render
 import requests
-import datetime
 from django.contrib import messages
 import publicip
 from googleapiclient.discovery import build
@@ -9,7 +8,6 @@ from googleapiclient.discovery import build
 
 
 def index(request):
-    today = datetime.date.today()
     url = 'http://api.openweathermap.org/data/2.5/weather?q={}&units=metric&appid=7d3e88675b678961df9ba90435e7a5f6'
     
     if request.method == 'POST':
@@ -28,7 +26,6 @@ def index(request):
              } 
             context = {
         'weather':weather,
-        'today':today,
             }
             return render(request,'core/index.html',context)
         except :
@@ -46,7 +43,6 @@ def index(request):
              } 
     context = {
         'weather':weather,
-        'today':today,
             }
     return render(request,'core/index.html',context)
 
@@ -54,12 +50,13 @@ def index(request):
 
 def ip(request):
 
-    ip = requests.get('https://ipapi.co/ip/').text
+    ip = requests.get('http://ipinfo.io/json').json()['ip']
     url = "http://api.ipstack.com/{}?access_key=36b65ab092455a14f25413ae9dc8e9b0"
     if request.method == 'POST':
         searchWord = request.POST.get('search','')
         try:        
             ip = searchWord
+
             r = requests.get(url.format(ip)).json()
             context = {
         'ip':ip,
@@ -78,7 +75,7 @@ def ip(request):
             return render(request,'core/ip.html',context)
         except :
             messages.error(request, 'IP not found !!')
-    ip = requests.get('https://ipapi.co/ip/').text
+    ip = requests.get('http://ipinfo.io/json').json()['ip']
     r = requests.get(url.format(ip)).json()
     context = {
         'ip':ip,
